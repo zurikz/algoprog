@@ -1,0 +1,99 @@
+test:
+1
+answer:
+1 korova
+
+test:
+2
+answer:
+2 korovy
+
+test:
+3
+answer:
+3 korovy
+
+test:
+4
+answer:
+4 korovy
+
+test:
+5
+answer:
+5 korov
+
+test:
+6
+answer:
+6 korov
+
+test:
+7
+answer:
+7 korov
+
+test:
+8
+answer:
+8 korov
+
+test:
+9
+answer:
+9 korov
+
+test:
+10
+answer:
+10 korov
+
+test:
+11
+answer:
+11 korov
+
+test:
+12
+answer:
+12 korov
+
+test:
+21
+answer:
+21 korova
+
+test:
+22
+answer:
+22 korovy
+
+test:
+23
+answer:
+23 korovy
+
+test:
+24
+answer:
+24 korovy
+
+test:
+25
+answer:
+25 korov
+
+test:
+31
+answer:
+31 korova
+
+test:
+82
+answer:
+82 korovy
+
+test:
+99
+answer:
+99 korov
