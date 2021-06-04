@@ -1,0 +1,54 @@
+test:
+1555 1603
+answer:
+0
+
+test:
+1573 1605
+answer:
+1
+
+test:
+1605 1606
+answer:
+0
+
+test:
+1605 1640
+answer:
+3
+
+test:
+1615 1645
+answer:
+3
+
+test:
+1625 1634
+answer:
+0
+
+test:
+1700 1705
+answer:
+1
+
+test:
+1705 1755
+answer:
+5
+
+test:
+1607 1688
+answer:
+8
+
+test:
+1614 1615
+answer:
+1
+
+test:
+1688 1735
+answer:
+5
