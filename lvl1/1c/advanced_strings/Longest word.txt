@@ -1,0 +1,29 @@
+test:
+one two three four five six  
+answer:
+three
+5
+
+test:
+Hello my dear friend
+answer:
+friend
+6
+
+test:
+ a a a 
+answer:
+a 
+1
+
+test:
+  ab cd ef
+answer:
+ab
+2
+
+test:
+    hey boy
+answer:
+hey
+3
