@@ -14,11 +14,16 @@ answer:
 ab
 
 test:
-abc#
+acb#
 answer:
-acb
+abc
 
 test:
-abcd#
+adbc#
 answer:
-adbc
+abcd
+
+test:
+aebdc#
+answer:
+abcde

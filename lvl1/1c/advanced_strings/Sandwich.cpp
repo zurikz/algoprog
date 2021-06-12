@@ -9,11 +9,12 @@ string decrypt(const string& encrypted) {
     char decrypted[len];
     for (int i = 0; i < len; i++) {
         if (i % 2 == 0) {
-            decrypted[i] = encrypted[i];
+            decrypted[i / 2] = encrypted[i];
         } else {
-            decrypted[len - i] = encrypted[i];
+            decrypted[(len - 1) - (i / 2)] = encrypted[i];
         }
     }
+    return string(decrypted);
 }
 
 void readTest(ifstream& file, string& encrypted, string& answer) {
@@ -32,10 +33,10 @@ int test(ifstream& file) {
         string encrypted, answer;
         readTest(file, encrypted, answer);
         string decrypted = decrypt(encrypted);
-        if (decrypted != solution) {
+        if (decrypted != answer) {
             cout << "Failed test:" << endl;
             cout << encrypted << endl;
-            cout << "Answer: " << answer << endl;
+            cout << "Answer:    " << answer << endl;
             cout << "My answer: " << decrypted << endl;
             return 1;
         }
@@ -45,7 +46,10 @@ int test(ifstream& file) {
 }
 
 int main() {
-    ifstream file("Sandwich.txt");
-    test(file);
+    // ifstream file("Sandwich.txt");
+    // test(file);
+    string input;
+    cin >> input;
+    cout << decrypt(input);
     return 0;
 }
