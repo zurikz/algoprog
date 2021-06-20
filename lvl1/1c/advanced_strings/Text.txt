@@ -1,0 +1,53 @@
+test:
+a
+answer:
+a
+
+test:
+ab
+answer:
+ba
+
+test:
+a!
+answer:
+a!
+
+test:
+Thisisveryveryverylongword
+answer:
+drowgnolyrevyrevyrevsisihT
+
+test:
+This test is very! easy and short.
+But it's  ,. mo:re difficult than first.
+answer:
+sihT tset si yrev! ysae dna trohs.
+tuB ti's  ,. om:er tluciffid naht tsrif.
+
+test:
+Hello, world!
+Привет, мир!
+answer:
+olleH, dlrow!
+Привет, мир!
+
+test:
+privet
+answer:
+tevirp
+
+test:
+privet mir
+answer:
+tevirp rim
+
+test:
+Привет
+answer:
+Привет
+
+test:
+hello!!!world
+answer:
+olleh!!!dlrow
