@@ -1,0 +1,29 @@
+test:
+31.05
+answer:
+1 2 6
+
+test:
+30
+answer:
+1 0 0
+
+test:
+0
+answer:
+0 0 0
+
+test:
+360
+answer:
+12 0 0
+
+test:
+390
+answer:
+13 0 0
+
+test:
+391.05
+answer:
+13 2 6
