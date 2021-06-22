@@ -4,10 +4,16 @@
 
 using namespace std;
 
+const int oneHourAngle = 360 / 12;
+const double oneMinuteAngle = oneHourAngle / 60.0;
+const double oneSecondAngle = oneMinuteAngle / 60;
+
 string solve(double alpha) {
-    int hrs = int(alpha / 30);
-    int mins = int(2 * (alpha - (30 * hrs)));
-    int secs = int(120 * (alpha - 30 * hrs - 0.5 * mins));
+    int hrs = int(alpha / oneHourAngle);
+    alpha -= hrs * oneHourAngle;
+    int mins = int(alpha / oneMinuteAngle);
+    alpha -= mins * oneMinuteAngle;
+    int secs = int(alpha / oneSecondAngle);
     return to_string(hrs) + " " + to_string(mins) + " " + to_string(secs);
 }
 
