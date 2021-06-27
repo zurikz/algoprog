@@ -6,12 +6,12 @@ using namespace std;
 
 string solve(int seconds) {
     string answer;
-    int hrs = (seconds / (60 * 60)) % 24;
-    answer += to_string(hrs) + ':';
+    int hrs = seconds / (60 * 60);
+    answer += to_string(hrs % 24) + ':';
     int mins = (seconds - hrs * 60 * 60) / 60;
-    answer += to_string(mins / 10) + to_string(mins) + ':';
+    answer += to_string(mins / 10) + to_string(mins % 10) + ':';
     int secs = seconds - hrs * 60 * 60 - mins * 60;
-    answer += to_string(secs / 10) + to_string(secs);
+    answer += to_string(secs / 10) + to_string(secs % 10);
     return answer;
 }
 
