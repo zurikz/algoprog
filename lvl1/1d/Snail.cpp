@@ -5,7 +5,9 @@
 using namespace std;
 
 int solve(int h, int a, int b) {
-    return (h - a + 1) / (a - b);
+    int step = a - b;
+    int d = (h - b - 1) / step;
+    return 1 + d;
 }
 
 void readTest(ifstream& file, int& h, int& a, int& b, int& answer) {
@@ -36,7 +38,8 @@ int test(ifstream& file) {
 }
 
 int main() {
-    ifstream file("Snail.txt");
-    test(file);
+    int h, a, b;
+    cin >> h >> a >> b;
+    cout << solve(h, a, b);
     return 0;
 }

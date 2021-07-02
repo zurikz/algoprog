@@ -1,5 +1,12 @@
 test:
 10
+5
+2
+answer:
+3
+
+test:
+10
 3
 2
 answer:
@@ -37,5 +44,12 @@ test:
 5
 5
 4
+answer:
+1
+
+test:
+3
+10
+8
 answer:
 1
