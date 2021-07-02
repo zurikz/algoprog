@@ -1,0 +1,29 @@
+test:
+1
+answer:
+9 45
+
+test:
+2
+answer:
+10 35
+
+test:
+3
+answer:
+11 35
+
+test:
+4
+answer:
+12 25
+
+test:
+5
+answer:
+13 25
+
+test:
+6
+answer:
+14 15
