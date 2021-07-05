@@ -1,70 +1,32 @@
 #include <iostream>
 #include <fstream>
-#include <limits>
 #include <vector>
 #include <string>
 #include <tuple>
 
 using namespace std;
 
-void merge(vector<int>& v, size_t leftStart, size_t leftEnd, size_t rightEnd) {
-    int leftSize = leftEnd - leftStart + 1;
-    int rightSize = rightEnd - leftEnd;
-    int leftArray[leftSize + 1], rightArray[rightSize + 1];
-    for (size_t i = leftStart; i <= leftEnd; ++i) {
-        leftArray[i - leftStart] = v[i];
+vector<int> makeLadder(const vector<int>& cards) {
+    int num2freq[5001] = {0};
+    int max = -1;
+    for (size_t i = 0; i < cards.size(); i++) {
+        ++num2freq[cards[i]];
+        max = std::max(max, cards[i]);
     }
-    for (size_t i = leftEnd + 1; i <= rightEnd; ++i) {
-        rightArray[i - (leftEnd + 1)] = v[i];
-    }
-    size_t leftIdx = 0;
-    size_t rightIdx = 0;
-    leftArray[leftSize] = numeric_limits<int>::min();
-    rightArray[rightSize] = numeric_limits<int>::min();
-    for (size_t i = leftStart; i <= rightEnd; ++i) {
-        if (leftArray[leftIdx] > rightArray[rightIdx]) {
-            v[i] = leftArray[leftIdx];
-            ++leftIdx;
-        } else {
-            v[i] = rightArray[rightIdx];
-            ++rightIdx;
-        }
-    }
-}
 
-void mergeSortDesc(vector<int>& v, size_t startIdx, size_t endIdx) {
-    if (startIdx < endIdx) {
-        size_t q = (startIdx + endIdx) / 2;
-        mergeSortDesc(v, startIdx, q);
-        mergeSortDesc(v, q + 1, endIdx);
-        merge(v, startIdx, q, endIdx);
+    vector<int> ladder;
+    for (size_t i = 1; i <= max; i++) {
+        if (num2freq[i]) {
+            ladder.push_back(i);
+            --num2freq[i];
+        }
     }
-}
+    for (size_t i = max - 1; i > 0; i--) {
+        if (num2freq[i]) {
+            ladder.push_back(i);
+        }
+    }
 
-vector<int> makeLadder(vector<int> cards) {
-    vector<int> left, right, ladder;
-    mergeSortDesc(cards, 0, cards.size() - 1);
-    int max = cards[0];
-    right.push_back(max);
-    for (size_t i = 1; i < cards.size(); ++i) {
-        if (cards[i] == max) {
-            continue;
-        } else if (cards[i] < cards[i - 1]) {
-            right.push_back(cards[i]);
-        } else if (left.empty()) {
-            left.push_back(cards[i]);
-        } else if (cards[i] != left[left.size() - 1]) {
-            left.push_back(cards[i]);
-        }
-    }
-    if (left.size() > 0) {
-        for (int i = left.size() - 1; i >= 0; --i) {
-            ladder.push_back(left[i]);
-        }
-    }
-    for (size_t i = 0; i < right.size(); ++i) {
-        ladder.push_back(right[i]);
-    }
     return ladder;
 }
 
