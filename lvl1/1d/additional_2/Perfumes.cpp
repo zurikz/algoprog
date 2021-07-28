@@ -23,7 +23,13 @@ int main() {
         for (int type = 1; type <= types; type++) {
             double volume = flasksData[originFlask][type] * (percent / 100.0);
             flasksData[destinationFlask][type] += volume;
+            if (flasksData[destinationFlask][type] < 10e-10) {
+                flasksData[destinationFlask][type] = 0;
+            }
             flasksData[originFlask][type] -= volume;
+            if (flasksData[originFlask][type] < 10e-10) {
+                flasksData[originFlask][type] = 0;
+            }
         }
     }
 
@@ -31,6 +37,15 @@ int main() {
     for (int type = 1; type <= types; type++) {
         sum += flasksData[1][type];
     }
+
+    // cout << endl;
+    // for (int flask = 1; flask <= flasks; flask++) {
+    //     for (int type = 1; type <= types; type++) {
+    //         cout << flasksData[flask][type] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
 
     for (int type = 1; type <= types; type++) {
         cout << fixed << setprecision(3) << 100 * flasksData[1][type] / sum << " ";
