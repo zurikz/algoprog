@@ -4,21 +4,35 @@
 
 using namespace std;
 
-const bool TEST = 1;
+const bool TEST = 0;
 
 struct Point {
     int x;
     int y;
 };
 
+int gcd(int a, int b) {
+    while (b != 0) {
+        int tmp = a;
+        a = b;
+        b = tmp % b;
+    }
+    return a;
+}
+
 int solve(Point a, Point b) {
-    return cells;
+    int dx = abs(a.x - b.x);
+    int dy = abs(a.y - b.y);
+    if (dx == 0) 
+        return 0;
+    int d = gcd(dx, dy);
+    return d * ((dx / d) + (dy / d) - 1);
 }
 
 /****** testing ******/
 
 void readTest(ifstream& file, Point& a, Point& b, int& answer) {
-    file >> a.x >> a.y >> b.x >> b.y;
+    file >> a.x >> a.y >> b.x >> b.y >> answer;
     file.ignore();
     string line;
     getline(file, line);
@@ -45,7 +59,7 @@ int test(ifstream& file) {
 
 int main() {
     if (TEST) {
-        ifstream file("Reduction.txt");
+        ifstream file("Segment.txt");
         test(file);
     } else {
         Point a, b;
