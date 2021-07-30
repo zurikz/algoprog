@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const bool TEST = 0;
+const bool TEST = 1;
 
 struct Point {
     int x;
@@ -23,10 +23,8 @@ int gcd(int a, int b) {
 int solve(Point a, Point b) {
     int dx = abs(a.x - b.x);
     int dy = abs(a.y - b.y);
-    if (dx == 0) 
-        return 0;
     int d = gcd(dx, dy);
-    return d * ((dx / d) + (dy / d) - 1);
+    return dx + dy - d;
 }
 
 /****** testing ******/
