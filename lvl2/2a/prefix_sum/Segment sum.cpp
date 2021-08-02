@@ -6,20 +6,34 @@
 
 using namespace std;
 
-const bool TEST = 1;
+const bool TEST = 0;
 
 struct Query {
     unsigned int left;
     unsigned int right;
 };
 
+vector<int> makePrefixSums(const vector<int>& vec) {
+    vector<int> prefixSums(vec.size() + 1);
+    prefixSums[0] = 0;
+    for (size_t i = 1; i < prefixSums.size(); i++) {
+        prefixSums[i] = prefixSums[i - 1] + vec[i - 1];
+    }
+    return prefixSums;
+}
+
 vector<int> segmentSum(const vector<int>& input, const vector<Query>& queries) {
-    return {0};
+    vector<int> sums;
+    vector<int> prefixSums = makePrefixSums(input);
+    for (const Query& q : queries) {
+        sums.push_back(prefixSums[q.right] - prefixSums[q.left - 1]);
+    }
+    return sums;
 }
 
 /****** testing ******/
 
-tuple readTest(ifstream& file) {
+tuple<vector<int>, vector<Query>, vector<int>> readTest(ifstream& file) {
     int n, m;
     file >> n >> m;
     vector<int> input(n);
@@ -34,6 +48,8 @@ tuple readTest(ifstream& file) {
     for (int& a : answers) {
         file >> a;
     }
+    string line;
+    getline(file, line);
     return tie(input, queries, answers);
 }
 
@@ -47,7 +63,7 @@ int test(ifstream& file) {
                 cout << x << " ";
             cout << endl;
             for (const auto& q : queries)
-                cout << q.left << " " << q.right << ", ";
+                cout << q.left << " " << q.right << " ";
             cout << endl;
             for (const auto& a : answers)
                 cout << a << "   ";
@@ -68,9 +84,11 @@ int main() {
     } else {
         int n, m;
         cin >> n >> m;
+
         vector<int> input(n);
         for (int& x : input)
             cin >> x;
+
         vector<Query> queries(m);
         for (auto& q : queries)
             cin >> q.left >> q.right;
