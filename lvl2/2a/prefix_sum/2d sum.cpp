@@ -14,8 +14,8 @@ struct Query {
 };
 
 vector<vector<int>> make2dPrefixSums(const vector<vector<int>>& matrix) {
-    int rows = matrix.size() + 1;
-    int cols = matrix[0].size() + 1;
+    size_t rows = matrix.size() + 1;
+    size_t cols = matrix[0].size() + 1;
     vector<vector<int>> pref(rows, vector<int> (cols, 0));
 
     for (size_t row = 1; row < rows; row++) {
