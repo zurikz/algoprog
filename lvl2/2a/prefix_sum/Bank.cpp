@@ -5,25 +5,24 @@
 
 using namespace std;
 
-const bool TEST = 1;
-
-vector<int> makeSuffMaxIndices(const vector<int>& vec) {
-    // Indices of max elements instead of max values
-    vector<int> suffMaxIndices(vec.size());
-    suffMaxIndices[vec.size() - 1] = vec.size() - 1;
-    for (int i = vec.size() - 2; i >= 0; --i) {
-        if (vec[suffMaxIndices[i + 1]] <= vec[i]) {
-            suffMaxIndices[i] = i;
-        } else {
-            suffMaxIndices[i] = suffMaxIndices[i + 1];
-        }
-    }
-    return suffMaxIndices;
-}
+const bool TEST = 0;
 
 vector<int> solve(const vector<int>& vec, int k) {
-    vector<int> suffMaxIndices = makeSuffMaxIndices(vec);
-    return {suffMaxIndices[0] + 1, suffMaxIndices[k + 1] + 1};
+    vector<int> solution(2);
+    int prefMaxIdx = 0;
+    int maxSum = -1;
+    for (int i = 0; i < vec.size() - k - 1; i++) {
+        if (vec[i] > vec[prefMaxIdx]) {
+            prefMaxIdx = i;
+        }
+        int currSum = vec[prefMaxIdx] + vec[i + k + 1];
+        if (currSum > maxSum) {
+            maxSum = currSum; 
+            solution[0] = prefMaxIdx + 1;
+            solution[1] = i + k + 2;
+        } 
+    }
+    return solution;
 }
 
 /****** testing ******/
