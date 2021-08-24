@@ -3,37 +3,31 @@
 
 using namespace std;
 
-void partition(vector<int>& a, int n, int sum, vector<vector<int>>& answer) {
-    if (sum == n) {
-        answer.push_back(a);
+void check(const vector<int>& a) {
+    for (size_t i = 1; i < a.size(); i++) {
+        cout << a[i] << " ";
+    }
+    cout << '\n';
+}
+
+void partition(vector<int>& a, int n) {
+    if (n == 0) {
+        check(a);
         return;
     }
-    int bound;
-    if (sum == 0) {
-        bound = n;
-    } else {
-        bound = min(n - sum, a.back());
-    }
-    for (int j = bound; j > 0; --j) {
-        a.push_back(j);
-        sum += j;
-        partition(a, n, sum, answer);
-        sum -= j;
-        a.pop_back();
+    for (int j = 1; j <= a.back(); j++) {
+        if (n - j >= 0) {
+            a.push_back(j);
+            partition(a, n - j);
+            a.pop_back();
+        }
     }
 }
 
 int main() {
     int n;
     cin >> n;
-    vector<int> a;
-    vector<vector<int>> answer;
-    partition(a, n, 0, answer);
-    for (int i = answer.size() - 1; i >= 0; --i) {
-        for (const int& x : answer[i]) {
-            cout << x << ' ';
-        }
-        cout << '\n';
-    }
+    vector<int> a = {n};
+    partition(a, n);
     return 0;
 }
