@@ -13,35 +13,35 @@ struct Bet {
 
 typedef pair<Bet, Bet> User;
 
-bool checkBet(const vector<int>& a, const Bet& bet) {
-    size_t winnerPos, looserPos;
-    for (size_t i = 0; i < a.size(); i++) {
-        if (a[i] == bet.winner) {
-            winnerPos = i;
-        }
-        if (a[i] == bet.looser) {
-            looserPos = i;
-        }
+vector<int> getInverse(const vector<int> permutation) {
+    vector<int> inverse(permutation.size());
+    for (int i = 0; i < (int) permutation.size(); i++) {
+        inverse[permutation[i]] = i;
     }
-    if (winnerPos < looserPos) {
+    return inverse;
+}
+
+bool checkBet(const vector<int>& inverse, const Bet& bet) {
+    if (inverse[bet.winner - 1] < inverse[bet.looser - 1]) {
         return true;
     }
     return false;
 }
 
 void check(const vector<int>& a, const vector<User>& users, string& answer) {
+    vector<int> inverse = getInverse(a);
     for (const auto& user : users) {
-        bool firstBet = checkBet(a, user.first);
-        bool secondBet = checkBet(a, user.second);
+        bool firstBet = checkBet(inverse, user.first);
+        bool secondBet = checkBet(inverse, user.second);
         if (firstBet == secondBet) {
             return;
         }
     }
     answer = "";
     for (size_t i = 0; i < a.size() - 1; i++) {
-        answer += to_string(a[i]) + " ";
+        answer += to_string(a[i] + 1) + " ";
     }
-    answer += to_string(a.back());
+    answer += to_string(a.back() + 1);
 }
 
 void permute(
@@ -55,7 +55,7 @@ void permute(
         check(a, users, answer);
         return;
     }
-    for (int j = 1; j <= static_cast<int>(a.size()); j++) {
+    for (int j = 0; j < static_cast<int>(a.size()); j++) {
         if (!was[j]) {
             a[i] = j;
             was[j] = true;
