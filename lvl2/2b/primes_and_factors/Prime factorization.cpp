@@ -4,7 +4,7 @@ using namespace std;
 
 void primeFactorization(int n) {
     int divisor = 2;
-    while (divisor * divisor <= n) {
+    while (divisor <= n / divisor) {
         if (n % divisor == 0) {
             cout << divisor;
             n = n / divisor;
