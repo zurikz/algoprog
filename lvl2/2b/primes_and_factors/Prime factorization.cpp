@@ -9,10 +9,8 @@ void primeFactorization(int n) {
             cout << divisor;
             n = n / divisor;
             cout << '*';
-        } else if (divisor == 2) {
-            divisor = 3;
         } else {
-            divisor += 2;
+            ++divisor;
         }
     }
     cout << n;
