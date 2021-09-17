@@ -1,11 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <limits>
 
 using namespace std;
 
-vector<bool> sieveOfEratosthenes(long long n) {
+vector<bool> sieveOfEratosthenes(int n) {
     vector<bool> sieve(n + 1, true);
     for (size_t i = 2; i * i <= n; i++) {
         if (sieve[i]) {
