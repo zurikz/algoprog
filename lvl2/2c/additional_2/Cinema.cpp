@@ -12,11 +12,7 @@ int gcd(int a, int b) {
 }
 
 int solve(int n, int m) {
-    if ((n == 1) || (m == 1)) {
-        return max(n, m);
-    } else {
-        return 1 + gcd(n - 1, m - 1);
-    }
+    return 1 + gcd(n - 1, m - 1);
 }
 
 int main() {
