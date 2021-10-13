@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -15,39 +16,44 @@ ostream& operator<<(ostream& out, const vector<T>& vec) {
     return out;
 }
 
+tuple<double, int> Max(const vector<double>& vec) {
+    auto maxIt = max_element(vec.begin(), vec.end());
+    auto argmax = static_cast<int>(distance(vec.begin(), maxIt));
+    return make_tuple(*maxIt, argmax);
+}
+
 tuple<double, vector<int>> solve(const vector<int>& input) {
-    vector<vector<int>> seqPrev = {{input[0]}};
-    if (input.size() == 1) {
-        return make_tuple(0, seqPrev.back());
-    }
-    vector<double> ansPrev(input[0]);
-    for (int day = 1; day < (int)input.size(); day++) {
-        vector<double> ans(input[day]);
-        vector<vector<int>> seq(input[day]);
-        for (int curr = 1; curr <= (int)ans.size(); curr++) {
+    vector<vector<double>> ans(input.size() + 1);
+    vector<vector<int>> from(input.size() + 1);
+    for (int i = 1; i <= (int)ans.size() - 1; i++) {
+        ans[i] = vector<double> (input[i - 1], 0);
+        from[i] = vector<int> (input[i - 1], 0);
+        for (int curr = 1; curr <= (int)ans[i].size(); curr++) {
             double max = 0;
-            vector<int> maxSeq;
-            for (int prev = 1; prev <= (int)ansPrev.size(); prev++) {
-                double rating = ansPrev[prev - 1] + (double) curr / prev;
-                vector<int> vec = seqPrev[prev - 1];
-                vec.push_back(curr);
+            int fromPrev = input[i - 1];
+            for (int prev = 1; prev <= (int)ans[i - 1].size(); prev++) {
+                double rating = ans[i - 1][prev - 1] + (double) curr / prev;
                 if (rating > max) {
                     max = rating;
-                    maxSeq = vec;
+                    fromPrev = prev;
                 }
             }
-            ans[curr - 1] = max;
-            seq[curr - 1] = maxSeq;
+            ans[i][curr - 1] = max;
+            from[i][curr - 1] = fromPrev;
         }
-        ansPrev = ans;
-        seqPrev = seq;
     }
-    return tie(ansPrev.back(), seqPrev.back());
+    auto [max, argmax] = Max(ans.back());
+    vector<int> seq = {1 + argmax};
+    for (int i = (int)ans.size() - 1; i >= 2; i--) {
+        seq.push_back(from[i][seq.back() - 1]);
+    }
+    reverse(seq.begin(), seq.end());
+    return tie(max, seq);
 }
 
 /****** tesing ******/
 
-const bool TEST = 1;
+const bool TEST = 0;
 
 vector<int> readInput(istream& in) {
     int n;
